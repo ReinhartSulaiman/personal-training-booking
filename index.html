@@ -2,148 +2,119 @@
 
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Booking Personal Training — Coach Reinhart</title>  <meta name="description" content="Personal training booking, live schedule, training calculators, and exercise library." />
-  <meta name="theme-color" content="#0ea5e9" />  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">  <style>
-    :root{ --bg:#0b1220; --muted:#94a3b8; --accent:#0ea5e9; }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Inter,system-ui;
-      background:linear-gradient(180deg,#0b1220,#0e182c);
-      color:#e5e7eb;
-      padding-bottom:90px; /* spacing for sticky */
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PT Booking — Coach Reinhart</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"><style>
+body{margin:0;font-family:Inter;background:#0b1220;color:#e5e7eb;padding-bottom:90px}
+.container{max-width:1000px;margin:auto;padding:20px}
 
-    .container{max-width:1050px;margin:0 auto;padding:24px}
-    h1{font-size:clamp(28px,4.5vw,40px)}
-    .lead{color:var(--muted)}
+.btn{padding:16px 22px;border-radius:14px;font-weight:700;text-decoration:none;display:inline-block;margin:8px}
+.btn.primary{background:#3b82f6;color:#fff;box-shadow:0 6px 20px rgba(59,130,246,.5)}
+.btn.secondary{background:#22d3ee;color:#0b1220}
 
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:16px 22px;margin:10px 10px 10px 0;
-      border-radius:14px;text-decoration:none;font-weight:700;
-      color:#0b1220;
-      background:linear-gradient(180deg,#38bdf8,#0ea5e9);
-      box-shadow:0 6px 16px rgba(14,165,233,.35);
-      transition:.15s;
-    }
-    .btn:hover{transform:translateY(-2px) scale(1.02)}
+.section{margin-top:20px;padding:16px;border-radius:12px;background:#111827}
 
-    .btn.primary{
-      border:2px solid #38bdf8;
-      background:linear-gradient(180deg,#60a5fa,#3b82f6);
-      color:#fff;
-      box-shadow:0 0 0 2px rgba(59,130,246,.4),0 10px 26px rgba(59,130,246,.55);
-    }
+.calendar-frame{height:600px;margin-top:10px}
+iframe{width:100%;height:100%;border:0}
 
-    .btn.secondary{background:linear-gradient(180deg,#6ee7f9,#22d3ee)}
+.tab{cursor:pointer;padding:10px;background:#1f2937;border-radius:8px;display:inline-block;margin-right:5px}
+.tab.active{background:#3b82f6}
+.tab-content{display:none}
+.tab-content.active{display:block}
 
-    .section{background:rgba(255,255,255,.05);border:1px solid rgba(148,163,184,.18);border-radius:16px;padding:18px;margin-top:18px}
+input,select{width:100%;padding:10px;margin-top:5px;border-radius:8px;background:#0b1220;color:#fff;border:1px solid #333}
 
-    .tabs{display:flex;gap:8px;margin-bottom:12px}
-    .tab{padding:10px 14px;border-radius:10px;background:#111827;border:1px solid rgba(148,163,184,.25);cursor:pointer}
-    .tab.active{background:#0ea5e9;color:#0b1220}
-    .tab-content{display:none}
-    .tab-content.active{display:block}
-
-    input,select{width:100%;padding:10px;border-radius:10px;background:#0b1220;color:#fff;border:1px solid rgba(148,163,184,.3)}
-    .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-
-    .sticky{
-      position:fixed;bottom:0;left:0;width:100%;
-      background:#0b1220;border-top:1px solid rgba(148,163,184,.2);
-      padding:10px;display:flex;justify-content:center;
-      transform:translateY(100%);
-      transition:.3s;
-    }
-    .sticky.show{transform:translateY(0)}
-
-    .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:30px}
-  </style></head>
+.sticky{position:fixed;bottom:0;width:100%;background:#0b1220;padding:10px;text-align:center;transform:translateY(100%);transition:.3s}
+.sticky.show{transform:translateY(0)}
+</style></head>
 <body>
-<div class="container"><h1>Booking & Training Tools — Coach Reinhart</h1>
-<p class="lead">Book sessions, track progress, and use training tools.</p><div class="section">
-  <a class="btn primary" href="https://bit.ly/PT-Booking-Reinhart" target="_blank">📘 Book Sekarang</a>
-  <a class="btn secondary" href="https://forms.gle/BqhfY4Rrbhf9NbZP9" target="_blank">✏️ Client Feedback</a>
-  <a class="btn secondary" href="https://wa.me/6285959735630" target="_blank">💬 WhatsApp Coach</a>
+<div class="container"><h1 id="title"></h1>
+<p id="subtitle"></p><div class="section">
+<a class="btn primary" href="https://bit.ly/PT-Booking-Reinhart" target="_blank">📘 Book Sekarang</a>
+<a class="btn secondary" href="https://forms.gle/BqhfY4Rrbhf9NbZP9" target="_blank">✏️ Feedback</a>
+<a class="btn secondary" href="https://wa.me/6285959735630" target="_blank">💬 WhatsApp</a>
 </div><div class="section">
-<h2>🛠 Training Tools</h2><div class="tabs">
-<div class="tab active" data-tab="macro">Macro</div>
-<div class="tab" data-tab="rpe">RPE</div>
-</div><div class="tab-content active" id="macro">
-<p class="lead">Estimate daily calories & macros based on your goal and activity.</p>
-<div class="grid">
-<input id="weight" placeholder="Weight (kg)">
-<input id="height" placeholder="Height (cm)">
+<h2>📅 Schedule</h2>
+<iframe src="https://calendar.google.com/calendar/embed?wkst=7&ctz=Asia%2FJakarta&mode=WEEK&src=cmVpbmhhcnRzdWxhaW1hbkBnbWFpbC5jb20"></iframe>
+</div><div class="section">
+<h2>🛠 Tools</h2><div>
+<span class="tab active" data-tab="macro">Macro</span>
+<span class="tab" data-tab="rpe">RPE</span>
+</div><div id="macro" class="tab-content active">
+<p>Estimate calories & macros based on goal.</p>
+<input id="weight" placeholder="Weight">
+<input id="height" placeholder="Height">
 <input id="age" placeholder="Age">
 <select id="activity">
-<option value="1.3">Sedentary (≤1x/week)</option>
-<option value="1.45">Light (2–3x/week)</option>
-<option value="1.6">Moderate (3–5x/week)</option>
-<option value="1.75">Active (6x/week)</option>
+<option value="1.3">Sedentary</option>
+<option value="1.6">Moderate</option>
+<option value="1.75">Active</option>
 </select>
 <select id="goal">
-<option value="cut">Fat Loss</option>
+<option value="cut">Cut</option>
 <option value="maintain">Maintain</option>
-<option value="bulk">Muscle Gain</option>
+<option value="bulk">Bulk</option>
 </select>
 <input id="meals" placeholder="Meals/day">
-</div>
 <button class="btn" onclick="calcMacro()">Calculate</button>
-<div id="macroResult" class="lead"></div>
-</div><div class="tab-content" id="rpe">
-<p class="lead">Estimate next training load based on effort (RPE).</p>
-<div class="grid">
-<input id="lw" placeholder="Last Weight">
+<div id="macroResult"></div>
+</div><div id="rpe" class="tab-content">
+<p>Estimate next load.</p>
+<input id="lw" placeholder="Weight">
 <input id="lr" placeholder="Reps">
 <input id="lrpe" placeholder="RPE">
-<input id="trpe" placeholder="Target RPE">
-</div>
+<input id="trpe" placeholder="Target">
 <button class="btn" onclick="calcRPE()">Calculate</button>
-<div id="rpeResult" class="lead"></div>
-</div></div><p class="footer">© 2026 Coach Reinhart</p>
-</div><div id="sticky" class="sticky">
+<div id="rpeResult"></div>
+</div></div></div><div id="sticky" class="sticky">
 <a href="https://bit.ly/PT-Booking-Reinhart" class="btn primary">📘 Book Sekarang</a>
 </div><script>
-// Tabs
-Array.from(document.querySelectorAll('.tab')).forEach(tab=>{
- tab.onclick=()=>{
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-  tab.classList.add('active');
-  document.getElementById(tab.dataset.tab).classList.add('active');
- }
-});
 
-// Macro
+// i18n
+const i18n={
+id:{title:"Booking & Tools — Coach Reinhart",subtitle:"Book and manage training."},
+en:{title:"Training Booking & Tools",subtitle:"Book and track training."}
+}
+const lang=navigator.language.startsWith('id')?'id':'en'
+document.getElementById('title').innerText=i18n[lang].title
+document.getElementById('subtitle').innerText=i18n[lang].subtitle
+
+// tabs
+document.querySelectorAll('.tab').forEach(t=>{
+t.onclick=()=>{
+document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'))
+document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'))
+t.classList.add('active')
+document.getElementById(t.dataset.tab).classList.add('active')
+}
+})
+
+// macro advanced
 function calcMacro(){
- let w=+weight.value,h=+height.value,a=+age.value;
- if(!w||!h||!a){macroResult.innerText='Fill all fields';return}
- let bmr=10*w+6.25*h-5*a+5;
- let tdee=bmr*+activity.value;
- if(goal.value==='cut')tdee*=0.8;
- if(goal.value==='bulk')tdee*=1.1;
- let protein=w*1.8;
- let fat=w*0.8;
- let carbs=(tdee-(protein*4+fat*9))/4;
- macroResult.innerText=`Calories: ${Math.round(tdee)} | P:${protein} F:${fat} C:${Math.round(carbs)}`;
+let w=+weight.value,h=+height.value,a=+age.value
+if(!w||!h||!a){macroResult.innerText='Fill all';return}
+let bmr=10*w+6.25*h-5*a+5
+let tdee=bmr*activity.value
+let deficit=goal.value==='cut'?0.2:goal.value==='bulk'?-0.1:0
+let cal=tdee*(1-deficit)
+let protein=w*1.8
+let fat=w*0.8
+let carbs=(cal-(protein*4+fat*9))/4
+macroResult.innerText=`${Math.round(cal)} kcal | P:${protein} F:${fat} C:${Math.round(carbs)}`
 }
 
-// RPE
+// rpe
 function calcRPE(){
- if(!lw.value||!lr.value||!lrpe.value||!trpe.value){rpeResult.innerText='Fill all fields';return}
- let oneRM=lw.value*(1+lr.value/30);
- rpeResult.innerText=`1RM: ${oneRM.toFixed(1)}`;
+if(!lw.value||!lr.value){rpeResult.innerText='Fill';return}
+let oneRM=lw.value*(1+lr.value/30)
+rpeResult.innerText=`1RM ${oneRM.toFixed(1)}`
 }
 
-// Sticky after scroll
+// sticky
 window.addEventListener('scroll',()=>{
- if(window.scrollY>200){document.getElementById('sticky').classList.add('show')}
- else{document.getElementById('sticky').classList.remove('show')}
-});
+if(window.scrollY>200){sticky.classList.add('show')}
+else{sticky.classList.remove('show')}
+})
+
 </script></body>
 </html>
