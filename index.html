@@ -8,10 +8,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Inter;background:#0b1220;color:#e5e7eb;padding-bottom:100px}
+body{
+margin:0;
+font-family:Inter;
+background:#0b1220;
+color:#e5e7eb;
+
+/* FIX: biar sticky ga nutup konten */
+padding-bottom:140px;
+}
+
 .container{max-width:1000px;margin:auto;padding:20px}
 
-/* buttons */
+/* BUTTON */
 .btn{
 padding:16px 24px;
 border-radius:14px;
@@ -25,7 +34,6 @@ transition:.2s;
 cursor:pointer;
 }
 
-/* primary (BOOK) */
 .btn.primary{
 background:#3b82f6;
 color:#fff;
@@ -39,20 +47,14 @@ from{box-shadow:0 0 10px rgba(59,130,246,.5)}
 to{box-shadow:0 0 25px rgba(59,130,246,.9)}
 }
 
-/* secondary */
-.btn.secondary{
-background:#22d3ee;
-color:#0b1220;
-}
+.btn.secondary{background:#22d3ee;color:#0b1220}
 
-/* whatsapp */
 .btn.whatsapp{
 background:#25D366;
 color:#fff;
 box-shadow:0 6px 18px rgba(37,211,102,.5);
 }
 
-/* hover */
 .btn:hover{transform:scale(1.05)}
 .btn:active{transform:scale(.97)}
 
@@ -63,10 +65,11 @@ border-radius:14px;
 background:#111827;
 }
 
+/* CALENDAR */
 .calendar-frame{height:600px;margin-top:10px}
 iframe{width:100%;height:100%;border:0}
 
-/* tabs */
+/* TABS */
 .tab{
 cursor:pointer;
 padding:10px 14px;
@@ -77,12 +80,10 @@ margin-right:5px;
 transition:.2s;
 }
 .tab.active{background:#3b82f6}
-.tab:hover{transform:translateY(-2px)}
-
 .tab-content{display:none}
 .tab-content.active{display:block}
 
-/* input */
+/* INPUT */
 input,select{
 width:100%;
 padding:12px;
@@ -93,7 +94,7 @@ color:#fff;
 border:1px solid #333;
 }
 
-/* sticky */
+/* STICKY */
 .sticky{
 position:fixed;
 bottom:0;
@@ -103,10 +104,11 @@ padding:12px;
 text-align:center;
 transform:translateY(100%);
 transition:.3s;
+z-index:999;
 }
 .sticky.show{transform:translateY(0)}
 
-/* language */
+/* LANGUAGE */
 .lang-switch{margin-bottom:10px}
 .lang-btn{
 padding:6px 10px;
@@ -117,11 +119,23 @@ color:#fff;
 cursor:pointer;
 margin-right:5px;
 }
-.lang-btn.active{
-background:#3b82f6;
+.lang-btn.active{background:#3b82f6}
+
+/* LIBRARY */
+.library-grid{
+display:grid;
+gap:12px;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+margin-top:12px;
+}
+.lib-card{
+background:#0b1220;
+border:1px solid rgba(148,163,184,.25);
+border-radius:12px;
+padding:16px;
 }
 
-/* micro interaction */
+/* MICRO */
 .section:hover{transform:translateY(-2px);transition:.2s}
 </style>
 </head>
@@ -129,6 +143,7 @@ background:#3b82f6;
 <body>
 <div class="container">
 
+<!-- LANG -->
 <div class="lang-switch">
 <button class="lang-btn" data-lang="id">🇮🇩 ID</button>
 <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
@@ -137,7 +152,7 @@ background:#3b82f6;
 <h1 id="title"></h1>
 <p id="subtitle"></p>
 
-<!-- BUTTONS -->
+<!-- BUTTON -->
 <div class="section">
 <a class="btn primary" href="https://bit.ly/PT-Booking-Reinhart" target="_blank">📘 Book Sekarang</a>
 <a class="btn secondary" href="https://forms.gle/BqhfY4Rrbhf9NbZP9" target="_blank">✏️ Client Feedback</a>
@@ -165,6 +180,7 @@ background:#3b82f6;
 <!-- MACRO -->
 <div id="macro" class="tab-content active">
 <p id="macroDesc"></p>
+
 <input id="weight" placeholder="Weight">
 <input id="height" placeholder="Height">
 <input id="age" placeholder="Age">
@@ -190,38 +206,46 @@ background:#3b82f6;
 <!-- RPE -->
 <div id="rpe" class="tab-content">
 <p id="rpeDesc"></p>
+
 <input id="lw" placeholder="Weight">
 <input id="lr" placeholder="Reps">
 <input id="lrpe" placeholder="RPE">
 <input id="trpe" placeholder="Target">
+
 <button class="btn" onclick="calcRPE()" id="btnCalcRPE">Calculate</button>
 <div id="rpeResult"></div>
 </div>
 
-<!-- Library -->
+<!-- LIBRARY (FIXED) -->
 <div id="library" class="tab-content">
 <div class="library-grid">
 
 <div class="lib-card">
 <strong>Leg Day</strong><br>
-<a class="btn secondary" target="_blank" href="https://drive.google.com/drive/folders/1LipGAf-ZUNBOxPy-kE7rmLvHkCLFwIK7">Open</a>
+<a class="btn secondary" target="_blank" rel="noopener"
+href="https://drive.google.com/drive/folders/1LipGAf-ZUNBOxPy-kE7rmLvHKCLFWIK7">Open</a>
 </div>
 
 <div class="lib-card">
 <strong>Push Day</strong><br>
-<a class="btn secondary" target="_blank" href="https://drive.google.com/drive/folders/1Ji1jzJpQkFollEmlOwvCmvVDj3uQ7lme">Open</a>
+<a class="btn secondary" target="_blank" rel="noopener"
+href="https://drive.google.com/drive/folders/1Ji1jzJpQkFollEm1OwvCmvVDj3uQ71me">Open</a>
 </div>
 
 <div class="lib-card">
 <strong>Pull Day</strong><br>
-<a class="btn secondary" target="_blank" href="https://drive.google.com/drive/folders/1MXtRYeJjjzkAhz4CQmvAB0NYOIso7G6b">Open</a>
+<a class="btn secondary" target="_blank" rel="noopener"
+href="https://drive.google.com/drive/folders/1MXtRYeJjjzkAhz4CQmvAB0NY0Iso7G6b">Open</a>
 </div>
 
 <div class="lib-card">
 <strong>Mobility</strong><br>
-<a class="btn secondary" target="_blank" href="https://drive.google.com/drive/folders/1PEmK0KWcsuAiZcEZ6m_ujhmGwKgMMkaZ">Open</a>
+<a class="btn secondary" target="_blank" rel="noopener"
+href="https://drive.google.com/drive/folders/1PEmK0KWcsuAiZcEZ6m_ujhmGwKgMMkaZ">Open</a>
 </div>
 
+</div>
+</div>
 
 </div>
 
@@ -276,7 +300,6 @@ rpeDesc:"Estimate next load."
 }
 }
 
-// apply
 function applyLang(lang){
 const t=i18n[lang]
 
