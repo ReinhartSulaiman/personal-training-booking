@@ -10,156 +10,140 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">  <style>
     :root{ --bg:#0b1220; --muted:#94a3b8; --accent:#0ea5e9; }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;background:linear-gradient(180deg,#0b1220,#0e182c);color:#e5e7eb}
+    body{
+      margin:0;
+      font-family:Inter,system-ui;
+      background:linear-gradient(180deg,#0b1220,#0e182c);
+      color:#e5e7eb;
+      padding-bottom:90px; /* spacing for sticky */
+    }
+
     .container{max-width:1050px;margin:0 auto;padding:24px}
-    h1{font-size:clamp(28px,4.5vw,40px);margin:12px 0}
-    h2{margin:0 0 8px}
+    h1{font-size:clamp(28px,4.5vw,40px)}
     .lead{color:var(--muted)}
+
     .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:16px 22px;
-      margin:10px 10px 10px 0;
-      border-radius:14px;
-      text-decoration:none;
-      font-weight:700;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:16px 22px;margin:10px 10px 10px 0;
+      border-radius:14px;text-decoration:none;font-weight:700;
       color:#0b1220;
       background:linear-gradient(180deg,#38bdf8,#0ea5e9);
-      box-shadow:0 6px 16px rgba(14,165,233,0.35);
-      transition:transform .15s ease, box-shadow .15s ease;
+      box-shadow:0 6px 16px rgba(14,165,233,.35);
+      transition:.15s;
     }
-    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(14,165,233,0.45)}
+    .btn:hover{transform:translateY(-2px) scale(1.02)}
 
     .btn.primary{
-      border:2px solid #22d3ee;
-      box-shadow:0 0 0 2px rgba(34,211,238,0.4), 0 10px 26px rgba(14,165,233,0.55);
+      border:2px solid #38bdf8;
+      background:linear-gradient(180deg,#60a5fa,#3b82f6);
+      color:#fff;
+      box-shadow:0 0 0 2px rgba(59,130,246,.4),0 10px 26px rgba(59,130,246,.55);
     }
-    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(14,165,233,0.45)}
-    .btn.secondary{
-      background:linear-gradient(180deg,#6ee7f9,#22d3ee);
-      box-shadow:0 6px 16px rgba(34,211,238,0.35);
-    }
+
+    .btn.secondary{background:linear-gradient(180deg,#6ee7f9,#22d3ee)}
+
     .section{background:rgba(255,255,255,.05);border:1px solid rgba(148,163,184,.18);border-radius:16px;padding:18px;margin-top:18px}
-    .lang-switch{display:flex;gap:8px;margin-bottom:8px}
-    .lang-btn{padding:6px 10px;border-radius:8px;border:1px solid rgba(148,163,184,.35);background:#0b1220;color:#cbd5e1;cursor:pointer;font-weight:600}
-    .lang-btn.active{background:var(--accent);color:#0b1220}
-    .calendar-frame{width:100%;height:720px;border-radius:12px;border:1px solid #777;margin-top:12px;overflow:hidden}
-    .calendar-frame iframe{width:100%;height:100%;border:0}
-    .mobile-note{margin-top:10px;padding:12px;border-radius:10px;background:#0b1220;border:1px dashed rgba(148,163,184,.4);color:var(--muted);font-size:14px}
-    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-    .tab{padding:10px 14px;border-radius:10px;background:#111827;border:1px solid rgba(148,163,184,.25);cursor:pointer;font-weight:600;color:#cbd5e1}
-    .tab.active{background:linear-gradient(180deg,#38bdf8,#0ea5e9);color:#0b1220}
+
+    .tabs{display:flex;gap:8px;margin-bottom:12px}
+    .tab{padding:10px 14px;border-radius:10px;background:#111827;border:1px solid rgba(148,163,184,.25);cursor:pointer}
+    .tab.active{background:#0ea5e9;color:#0b1220}
     .tab-content{display:none}
     .tab-content.active{display:block}
-    label{font-size:13px;color:var(--muted)}
-    input,select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(148,163,184,.35);background:#0b1220;color:#e5e7eb}
+
+    input,select{width:100%;padding:10px;border-radius:10px;background:#0b1220;color:#fff;border:1px solid rgba(148,163,184,.3)}
     .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-    .library-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:12px}
-    .lib-card{background:#0b1220;border:1px solid rgba(148,163,184,.25);border-radius:14px;padding:16px}
-    .footer{text-align:center;color:var(--muted);font-size:13px;margin:28px 0 10px}
+
+    .sticky{
+      position:fixed;bottom:0;left:0;width:100%;
+      background:#0b1220;border-top:1px solid rgba(148,163,184,.2);
+      padding:10px;display:flex;justify-content:center;
+      transform:translateY(100%);
+      transition:.3s;
+    }
+    .sticky.show{transform:translateY(0)}
+
+    .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:30px}
   </style></head>
 <body>
-<div class="container">
-  <div class="lang-switch">
-    <button class="lang-btn" data-lang="id">🇮🇩 ID</button>
-    <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
-  </div>
-  <h1 id="title"></h1>
-  <p id="subtitle" class="lead"></p>
-  <div class="section">
-    <a id="btnBook" class="btn primary" href="https://bit.ly/PT-Booking-Reinhart" target="_blank" rel="noopener">Book Sekarang</a>
-    <a id="btnFeedback" class="btn secondary" href="https://forms.gle/BqhfY4Rrbhf9NbZP9" target="_blank" rel="noopener">✏️ Client Feedback</a>
-    <!-- Removed redundant View Schedule button -->
-    <a id="btnWA" class="btn secondary" href="https://wa.me/6285959735630?text=Hello%20Coach,%20I%20want%20to%20ask%20about%20training." target="_blank" rel="noopener">💬 WhatsApp Coach</a>
-  </div>
-  <div id="schedule" class="section">
-    <h2 id="scheduleTitle"></h2>
-    <p id="scheduleHint" class="lead"></p>
-    <div id="mobileHint" class="mobile-note"></div>
-    <a id="openGoogle" class="btn secondary" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/u/0/embed?src=cmVpbmhhcnRzdWxhaW1hbkBnbWFpbC5jb20&ctz=Asia/Jakarta"></a>
-    <div class="calendar-frame">
-      <iframe src="https://calendar.google.com/calendar/embed?wkst=7&ctz=Asia%2FJakarta&mode=WEEK&showNav=1&showPrint=0&showTabs=0&src=cmVpbmhhcnRzdWxhaW1hbkBnbWFpbC5jb20"></iframe>
-    </div>
-  </div>
-  <div class="section">
-    <h2 id="toolsTitle">🛠 Training Tools</h2>
-    <p class="lead" id="toolsIntro"></p>
-    <div class="tabs">
-      <div class="tab active" data-tab="macro" id="tabMacro"></div>
-      <div class="tab" data-tab="rpe" id="tabRPE"></div>
-      <div class="tab" data-tab="library" id="tabLibrary"></div>
-    </div>
-    <div class="tab-content active" id="macro">
-      <div class="grid">
-        <div><label id="lblGender"></label><select id="sex"><option value="male">Male</option><option value="female">Female</option></select></div>
-        <div><label id="lblAge"></label><input id="age" type="number"></div>
-        <div><label id="lblWeight"></label><input id="weight" type="number"></div>
-        <div><label id="lblTargetWeight"></label><input id="targetWeight" type="number"></div>
-        <div><label id="lblHeight"></label><input id="height" type="number"></div>
-        <div><label id="lblActivity"></label>
-          <select id="activity">
-            <option value="1.3">Sedentary (≤1x / week)</option>
-            <option value="1.45">Light (2–3x / week)</option>
-            <option value="1.6">Moderate (3–5x / week)</option>
-            <option value="1.75">Very Active (6x+ / week)</option>
-          </select>
-        </div>
-        <div><label id="lblGoal"></label><select id="goal"><option value="cut">Cut</option><option value="maintain">Maintain</option><option value="bulk">Bulk</option></select></div>
-        <div><label id="lblMeals"></label><input id="meals" type="number"></div>
-      </div>
-      <button class="btn" onclick="calcMacro()" id="btnCalcMacro"></button>
-      <div id="macroResult" class="lead"></div>
-    </div>
-    <div class="tab-content" id="rpe">
-      <div class="grid">
-        <div><label>Last Weight (kg)</label><input id="lw" type="number"></div>
-        <div><label>Reps</label><input id="lr" type="number"></div>
-        <div><label>RPE</label><input id="lrpe" type="number" step="0.5"></div>
-        <div><label>Target RPE</label><input id="trpe" type="number" step="0.5"></div>
-        <div><label>Exercise Type</label><select id="etype"><option value="big">Big Muscle</option><option value="small">Small Muscle</option><option value="abs">Abs / Core</option></select></div>
-      </div>
-      <button class="btn" onclick="calcRPE()" id="btnCalcRPE"></button>
-      <div id="rpeResult" class="lead"></div>
-    </div>
-    <div class="tab-content" id="library">
-      <div class="library-grid">
-        <div class="lib-card"><strong>Leg Day</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1LipGAf-ZUNBOxPy-kE7rmLvHkCLFwIK7">Open</a></div>
-        <div class="lib-card"><strong>Push Day</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1Ji1jzJpQkFollEmlOwvCmvVDj3uQ7lme">Open</a></div>
-        <div class="lib-card"><strong>Pull Day</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1MXtRYeJjjzkAhz4CQmvAB0NYOIso7G6b">Open</a></div>
-        <div class="lib-card"><strong>Mobility</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1PEmK0KWcsuAiZcEZ6m_ujhmGwKgMMkaZ">Open</a></div>
-      </div>
-    </div>
-  </div><div style="position:fixed;bottom:0;left:0;width:100%;background:#0b1220;border-top:1px solid rgba(148,163,184,.2);padding:10px 16px;z-index:999;display:flex;justify-content:center;">
-  <a href="https://bit.ly/PT-Booking-Reinhart" class="btn primary" style="width:100%;max-width:420px;justify-content:center;">Book Sekarang</a>
-</div><p class="footer">© <span id="year"></span> Coach Reinhart</p>
+<div class="container"><h1>Booking & Training Tools — Coach Reinhart</h1>
+<p class="lead">Book sessions, track progress, and use training tools.</p><div class="section">
+  <a class="btn primary" href="https://bit.ly/PT-Booking-Reinhart" target="_blank">📘 Book Sekarang</a>
+  <a class="btn secondary" href="https://forms.gle/BqhfY4Rrbhf9NbZP9" target="_blank">✏️ Client Feedback</a>
+  <a class="btn secondary" href="https://wa.me/6285959735630" target="_blank">💬 WhatsApp Coach</a>
+</div><div class="section">
+<h2>🛠 Training Tools</h2><div class="tabs">
+<div class="tab active" data-tab="macro">Macro</div>
+<div class="tab" data-tab="rpe">RPE</div>
+</div><div class="tab-content active" id="macro">
+<p class="lead">Estimate daily calories & macros based on your goal and activity.</p>
+<div class="grid">
+<input id="weight" placeholder="Weight (kg)">
+<input id="height" placeholder="Height (cm)">
+<input id="age" placeholder="Age">
+<select id="activity">
+<option value="1.3">Sedentary (≤1x/week)</option>
+<option value="1.45">Light (2–3x/week)</option>
+<option value="1.6">Moderate (3–5x/week)</option>
+<option value="1.75">Active (6x/week)</option>
+</select>
+<select id="goal">
+<option value="cut">Fat Loss</option>
+<option value="maintain">Maintain</option>
+<option value="bulk">Muscle Gain</option>
+</select>
+<input id="meals" placeholder="Meals/day">
 </div>
-<script>
-const i18n={id:{title:"Booking & Training Tools — Coach Reinhart",subtitle:"Booking jadwal, lihat ketersediaan real-time, kalkulator latihan, dan exercise library.",book:"⚡ Book Sekarang (Slot Terbatas)",view:"👀 Lihat Jadwal",wa:"💬 WhatsApp Coach",scheduleTitle:"Jadwal Kosong (Live)",scheduleHint:"Gunakan panah ◀ ▶ di kalender untuk melihat minggu sebelum atau sesudah.",mobile:"📱 Jika kalender tidak tampil optimal di HP, gunakan tombol di bawah untuk membuka kalender Coach (read-only).",openCal:"📅 Open Coach Schedule (Google Calendar)",tools:"🛠 Training Tools",tabMacro:"Macro Calculator",tabRPE:"RPE Load Calculator",tabLibrary:"Exercise Library",gender:"Jenis Kelamin",age:"Usia",weight:"Berat (kg)",height:"Tinggi (cm)",activity:"Level Aktivitas",goal:"Tujuan",meals:"Makan / hari",calcMacro:"Hitung Makro",calcRPE:"Hitung Beban"},en:{title:"Training Booking & Tools — Coach Reinhart",subtitle:"Book sessions, view real-time availability, training calculators, and exercise library.",book:"Book Sekarang",view:"👀 View Schedule",wa:"💬 WhatsApp Coach",scheduleTitle:"Live Schedule",scheduleHint:"Use ◀ ▶ arrows to navigate previous or upcoming weeks.",mobile:"📱 If the calendar does not display well on mobile, use the button below to open the coach’s calendar (read-only).",openCal:"📅 Open Coach Schedule (Google Calendar)",tools:"🛠 Training Tools",tabMacro:"Macro Calculator",tabRPE:"RPE Load Calculator",tabLibrary:"Exercise Library",gender:"Gender",age:"Age",weight:"Weight (kg)",height:"Height (cm)",activity:"Activity Level",goal:"Goal",meals:"Meals / day",calcMacro:"Calculate Macros",calcRPE:"Calculate Load"}};
-function applyLang(lang){const t=i18n[lang];title.innerText=t.title;subtitle.innerText=t.subtitle;btnBook.innerText=t.book;btnView.innerText=t.view;btnWA.innerText=t.wa;
-  btnFeedback.innerText = (lang==='id') ? '📝 Client Feedback' : '📝 Client Feedback';scheduleTitle.innerText=t.scheduleTitle;scheduleHint.innerText=t.scheduleHint;mobileHint.innerText=t.mobile;openGoogle.innerText=t.openCal;toolsTitle.innerText=t.tools;tabMacro.innerText=t.tabMacro;tabRPE.innerText=t.tabRPE;tabLibrary.innerText=t.tabLibrary;lblGender.innerText=t.gender;lblAge.innerText=t.age;lblWeight.innerText=t.weight;lblHeight.innerText=t.height;lblActivity.innerText=t.activity;lblGoal.innerText=t.goal;lblMeals.innerText=t.meals;btnCalcMacro.innerText=t.calcMacro;btnCalcRPE.innerText=t.calcRPE;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));document.querySelector(`.lang-btn[data-lang='${lang}']`).classList.add('active');}
-const userLang=navigator.language.startsWith('id')?'id':'en';applyLang(userLang);document.querySelectorAll('.lang-btn').forEach(btn=>btn.onclick=()=>applyLang(btn.dataset.lang));document.querySelectorAll('.tab').forEach(tab=>{tab.onclick=()=>{document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));tab.classList.add('active');document.getElementById(tab.dataset.tab).classList.add('active');};});
+<button class="btn" onclick="calcMacro()">Calculate</button>
+<div id="macroResult" class="lead"></div>
+</div><div class="tab-content" id="rpe">
+<p class="lead">Estimate next training load based on effort (RPE).</p>
+<div class="grid">
+<input id="lw" placeholder="Last Weight">
+<input id="lr" placeholder="Reps">
+<input id="lrpe" placeholder="RPE">
+<input id="trpe" placeholder="Target RPE">
+</div>
+<button class="btn" onclick="calcRPE()">Calculate</button>
+<div id="rpeResult" class="lead"></div>
+</div></div><p class="footer">© 2026 Coach Reinhart</p>
+</div><div id="sticky" class="sticky">
+<a href="https://bit.ly/PT-Booking-Reinhart" class="btn primary">📘 Book Sekarang</a>
+</div><script>
+// Tabs
+Array.from(document.querySelectorAll('.tab')).forEach(tab=>{
+ tab.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById(tab.dataset.tab).classList.add('active');
+ }
+});
+
+// Macro
 function calcMacro(){
-  const w=+weight.value,h=+height.value,ageVal=+age.value,target=+targetWeight.value;
-  if(!w||!h||!ageVal){macroResult.innerText='Incomplete data.';return;}
-  let bmr=sex.value==='male'?(10*w+6.25*h-5*ageVal+5):(10*w+6.25*h-5*ageVal-161);
-  let tdee=bmr*+activity.value;
-  let deficit=0;
-  if(goal.value==='cut')deficit=0.2;
-  if(goal.value==='bulk')deficit=-0.1;
-  let adjusted=tdee*(1-deficit);
-  let protein=w*(goal.value==='cut'?2:1.6);
-  let fat=w*0.8;
-  let carbs=Math.max(0,(adjusted-(protein*4+fat*9))/4);let timeline=''; if(target&&target!==w){ const weeklyChange=goal.value==='cut'?0.5:goal.value==='bulk'?0.25:0; const weeks=Math.abs((target-w)/weeklyChange); timeline=<br><strong>Estimated timeline:</strong> ~${Math.ceil(weeks)} weeks (${weeklyChange} kg/week); }
+ let w=+weight.value,h=+height.value,a=+age.value;
+ if(!w||!h||!a){macroResult.innerText='Fill all fields';return}
+ let bmr=10*w+6.25*h-5*a+5;
+ let tdee=bmr*+activity.value;
+ if(goal.value==='cut')tdee*=0.8;
+ if(goal.value==='bulk')tdee*=1.1;
+ let protein=w*1.8;
+ let fat=w*0.8;
+ let carbs=(tdee-(protein*4+fat*9))/4;
+ macroResult.innerText=`Calories: ${Math.round(tdee)} | P:${protein} F:${fat} C:${Math.round(carbs)}`;
+}
 
-let split=''; if(+meals.value>0){split=<br><strong>Avg / meal:</strong> ${(protein/meals.value).toFixed(0)}P ${(fat/meals.value).toFixed(0)}F ${(carbs/meals.value).toFixed(0)}C;}
+// RPE
+function calcRPE(){
+ if(!lw.value||!lr.value||!lrpe.value||!trpe.value){rpeResult.innerText='Fill all fields';return}
+ let oneRM=lw.value*(1+lr.value/30);
+ rpeResult.innerText=`1RM: ${oneRM.toFixed(1)}`;
+}
 
-macroResult.innerHTML=`<strong>Calories:</strong> ${Math.round(adjusted)} kcal/day<br> <strong>Protein:</strong> ${protein.toFixed(0)} g<br> <strong>Fat:</strong> ${fat.toFixed(0)} g<br> <strong>Carbs:</strong> ${carbs.toFixed(0)} g<br> <strong>Deficit / surplus:</strong> ${deficit>0?Math.round(deficit100):deficit<0?Math.round(deficit100):0}%${timeline}${split}
-
-  <div class='muted' style='margin-top:6px'>Estimation based on activity level & healthy rate of change.</div>`;
-}}
-function calcRPE(){if(!lw.value||!lr.value||!lrpe.value||!trpe.value){rpeResult.innerText='Incomplete data.';return;}const oneRM=lw.value*(1+lr.value/30);let adj=(10-lrpe.value-(10-trpe.value))*0.02;if(etype.value==='small')adj*=0.7;if(etype.value==='abs')adj*=0.5;rpeResult.innerText=`1RM ≈ ${oneRM.toFixed(1)} kg | Next load ≈ ${(oneRM/(1+lr.value/30)*(1+adj)).toFixed(1)} kg`;}
-year.innerText=new Date().getFullYear();
-</script>
-</body>
+// Sticky after scroll
+window.addEventListener('scroll',()=>{
+ if(window.scrollY>200){document.getElementById('sticky').classList.add('show')}
+ else{document.getElementById('sticky').classList.remove('show')}
+});
+</script></body>
 </html>
