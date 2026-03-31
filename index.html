@@ -5,60 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PT Booking — Coach Reinhart</title>
 
-<meta name="description" content="Personal training booking, live schedule, training calculators, and exercise library." />
-<meta name="theme-color" content="#0ea5e9" />
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{ --bg:#0b1220; --muted:#94a3b8; --accent:#0ea5e9; }
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;
-background:linear-gradient(180deg,#0b1220,#0e182c);
-color:#e5e7eb;
-padding-bottom:90px;
-}
-
+body{margin:0;font-family:Inter;background:#0b1220;color:#e5e7eb;padding-bottom:90px}
 .container{max-width:1000px;margin:auto;padding:20px}
 
-/* ✅ UPDATED BUTTON */
 .btn{
-display:inline-flex;
-align-items:center;
-gap:10px;
-padding:18px 26px;
-margin:10px 8px;
-border-radius:16px;
-font-weight:800;
+padding:16px 22px;
+border-radius:14px;
+font-weight:700;
 text-decoration:none;
-font-size:16px;
-letter-spacing:.3px;
+display:inline-block;
+margin:8px;
 transition:.2s;
 }
 
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.96)}
+
 .btn.primary{
-background:#38bdf8;
-color:#0b1220;
-box-shadow:0 8px 25px rgba(56,189,248,.5);
-border:2px solid #7dd3fc;
+background:#3b82f6;
+color:#fff;
+box-shadow:0 6px 20px rgba(59,130,246,.5);
+animation:pulse 2.2s infinite;
 }
 
-.btn.primary:hover{
-transform:translateY(-2px) scale(1.02);
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 rgba(59,130,246,.6)}
+70%{box-shadow:0 0 0 14px rgba(59,130,246,0)}
+100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}
 }
 
 .btn.secondary{
 background:#22d3ee;
 color:#0b1220;
-opacity:.95;
 }
 
-.btn.secondary:hover{
-opacity:1;
-transform:translateY(-1px);
+.btn.whatsapp{
+background:#25D366;
+color:#0b1220;
+box-shadow:0 6px 20px rgba(37,211,102,.4);
 }
 
 .section{
@@ -66,13 +53,25 @@ margin-top:20px;
 padding:16px;
 border-radius:12px;
 background:#111827;
+transition:.25s;
 }
+
+.section:hover{transform:translateY(-2px)}
 
 .calendar-frame{height:600px;margin-top:10px}
 iframe{width:100%;height:100%;border:0}
 
-.tab{cursor:pointer;padding:10px;background:#1f2937;border-radius:8px;display:inline-block;margin-right:5px}
+.tab{
+cursor:pointer;
+padding:10px;
+background:#1f2937;
+border-radius:8px;
+display:inline-block;
+margin-right:5px
+}
+
 .tab.active{background:#3b82f6}
+
 .tab-content{display:none}
 .tab-content.active{display:block}
 
@@ -86,18 +85,6 @@ color:#fff;
 border:1px solid #333
 }
 
-.lang-switch{display:flex;gap:8px;margin-bottom:8px}
-.lang-btn{
-padding:6px 10px;
-border-radius:8px;
-border:1px solid rgba(148,163,184,.35);
-background:#0b1220;
-color:#cbd5e1;
-cursor:pointer;
-font-weight:600
-}
-.lang-btn.active{background:var(--accent);color:#0b1220}
-
 .sticky{
 position:fixed;
 bottom:0;
@@ -108,104 +95,75 @@ text-align:center;
 transform:translateY(100%);
 transition:.3s
 }
-.sticky.show{transform:translateY(0)}
 
-.footer{text-align:center;color:var(--muted);font-size:13px;margin:28px 0 10px}
+.sticky.show{transform:translateY(0)}
 </style>
 </head>
 
 <body>
 <div class="container">
 
-<div class="lang-switch">
-<button class="lang-btn" data-lang="id">🇮🇩 ID</button>
-<button class="lang-btn" data-lang="en">🇬🇧 EN</button>
-</div>
-
 <h1 id="title"></h1>
 <p id="subtitle"></p>
 
-<!-- ✅ UPDATED BUTTON SECTION -->
 <div class="section">
-<a id="btnBook" class="btn primary" href="https://bit.ly/PT-Booking-Reinhart" target="_blank" rel="noopener"></a>
-
-<a class="btn secondary" href="https://forms.gle/BqhfY4Rrbhf9NbZP9" target="_blank" rel="noopener">
-✏️ Feedback
-</a>
-
-<a id="btnWA" class="btn secondary" href="https://wa.me/6285959735630?text=Hello%20Coach,%20I%20want%20to%20ask%20about%20training." target="_blank" rel="noopener"></a>
-</div>
-
-<div id="schedule" class="section">
-<h2 id="scheduleTitle"></h2>
-<p id="scheduleHint"></p>
-
-<div id="mobileHint"></div>
-
-<a id="openGoogle" class="btn secondary" target="_blank" rel="noopener"
-href="https://calendar.google.com/calendar/u/0/embed?src=cmVpbmhhcnRzdWxhaW1hbkBnbWFpbC5jb20&ctz=Asia/Jakarta"></a>
-
-<div class="calendar-frame">
-<iframe src="https://calendar.google.com/calendar/embed?wkst=7&ctz=Asia%2FJakarta&mode=WEEK&showNav=1&showPrint=0&showTabs=0&src=cmVpbmhhcnRzdWxhaW1hbkBnbWFpbC5jb20"></iframe>
-</div>
+<a class="btn primary" href="https://bit.ly/PT-Booking-Reinhart" target="_blank">📘 Book Sekarang</a>
+<a class="btn secondary" href="https://forms.gle/BqhfY4Rrbhf9NbZP9" target="_blank">✏️ Client Feedback</a>
+<a class="btn whatsapp" href="https://wa.me/6285959735630" target="_blank">💬 WhatsApp</a>
 </div>
 
 <div class="section">
-<h2 id="toolsTitle"></h2>
+<h2>📅 Schedule</h2>
+<iframe src="https://calendar.google.com/calendar/embed?wkst=7&ctz=Asia%2FJakarta&mode=WEEK&src=cmVpbmhhcnRzdWxhaW1hbkBnbWFpbC5jb20"></iframe>
+</div>
+
+<div class="section">
+<h2>🛠 Tools</h2>
 
 <div>
-<span class="tab active" data-tab="macro" id="tabMacro"></span>
-<span class="tab" data-tab="rpe" id="tabRPE"></span>
-<span class="tab" data-tab="library" id="tabLibrary"></span>
+<span class="tab active" data-tab="macro">Macro</span>
+<span class="tab" data-tab="rpe">RPE</span>
 </div>
 
 <div id="macro" class="tab-content active">
+<p style="color:#94a3b8;font-size:14px">
+Estimate daily calories & macronutrients based on your body stats and activity level.
+</p>
+
 <input id="weight" placeholder="Weight">
 <input id="height" placeholder="Height">
 <input id="age" placeholder="Age">
-<select id="sex">
-<option value="male">Male</option>
-<option value="female">Female</option>
-</select>
+
 <select id="activity">
 <option value="1.3">Sedentary</option>
 <option value="1.6">Moderate</option>
 <option value="1.75">Active</option>
 </select>
+
 <select id="goal">
 <option value="cut">Cut</option>
 <option value="maintain">Maintain</option>
 <option value="bulk">Bulk</option>
 </select>
+
 <input id="meals" placeholder="Meals/day">
-<button class="btn" onclick="calcMacro()" id="btnCalcMacro"></button>
+
+<button class="btn" onclick="calcMacro()">Calculate</button>
 <div id="macroResult"></div>
 </div>
 
 <div id="rpe" class="tab-content">
+<p>Estimate next load.</p>
 <input id="lw" placeholder="Weight">
 <input id="lr" placeholder="Reps">
 <input id="lrpe" placeholder="RPE">
 <input id="trpe" placeholder="Target">
-<select id="etype">
-<option value="big">Big Muscle</option>
-<option value="small">Small Muscle</option>
-<option value="abs">Abs</option>
-</select>
-<button class="btn" onclick="calcRPE()" id="btnCalcRPE"></button>
+<button class="btn" onclick="calcRPE()">Calculate</button>
 <div id="rpeResult"></div>
 </div>
 
-<div id="library" class="tab-content">
-<div><strong>Leg Day</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1LipGAf-ZUNBOxPy-kE7rmLvHkCLFwIK7">Open</a></div>
-<div><strong>Push Day</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1Ji1jzJpQkFollEmlOwvCmvVDj3uQ7lme">Open</a></div>
-<div><strong>Pull Day</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1MXtRYeJjjzkAhz4CQmvAB0NYOIso7G6b">Open</a></div>
-<div><strong>Mobility</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1PEmK0KWcsuAiZcEZ6m_ujhmGwKgMMkaZ">Open</a></div>
 </div>
 
-</div>
-
-<p class="footer">© <span id="year"></span> Coach Reinhart</p>
 </div>
 
 <div id="sticky" class="sticky">
@@ -214,103 +172,58 @@ href="https://calendar.google.com/calendar/u/0/embed?src=cmVpbmhhcnRzdWxhaW1hbkB
 
 <script>
 
+// i18n
 const i18n={
 id:{
-title:"Booking & Training Tools — Coach Reinhart",
-subtitle:"Booking jadwal, lihat ketersediaan real-time, kalkulator latihan, dan exercise library.",
-book:"📘 Book Sekarang",
-wa:"💬 WhatsApp",
-scheduleTitle:"Jadwal Kosong (Live)",
-scheduleHint:"Gunakan panah ◀ ▶ di kalender.",
-mobile:"📱 Jika kalender tidak optimal di HP, gunakan tombol bawah.",
-openCal:"📅 Open Google Calendar",
-tools:"Training Tools",
-tabMacro:"Macro",
-tabRPE:"RPE",
-tabLibrary:"Library",
-calcMacro:"Hitung Makro",
-calcRPE:"Hitung Beban"
+title:"Booking & Tools — Coach Reinhart",
+subtitle:"Booking jadwal dan tools latihan."
 },
 en:{
-title:"Training Booking & Tools",
-subtitle:"Book sessions and track training.",
-book:"📘 Book Now",
-wa:"💬 WhatsApp",
-scheduleTitle:"Live Schedule",
-scheduleHint:"Use arrows to navigate.",
-mobile:"📱 Open calendar if not visible.",
-openCal:"📅 Open Google Calendar",
-tools:"Training Tools",
-tabMacro:"Macro",
-tabRPE:"RPE",
-tabLibrary:"Library",
-calcMacro:"Calculate",
-calcRPE:"Calculate"
+title:"Training Booking & Tools - Coach Reinhart",
+subtitle:"Book sessions, view coaching schedule availability, macronutrient calculator, and exercise library."
 }
-};
-
-function applyLang(lang){
-const t=i18n[lang];
-title.innerText=t.title;
-subtitle.innerText=t.subtitle;
-btnBook.innerText=t.book;
-btnWA.innerText=t.wa;
-scheduleTitle.innerText=t.scheduleTitle;
-scheduleHint.innerText=t.scheduleHint;
-mobileHint.innerText=t.mobile;
-openGoogle.innerText=t.openCal;
-toolsTitle.innerText=t.tools;
-tabMacro.innerText=t.tabMacro;
-tabRPE.innerText=t.tabRPE;
-tabLibrary.innerText=t.tabLibrary;
-btnCalcMacro.innerText=t.calcMacro;
-btnCalcRPE.innerText=t.calcRPE;
-
-document.querySelectorAll(".lang-btn").forEach(b=>b.classList.remove("active"));
-document.querySelector(`[data-lang="${lang}"]`).classList.add("active");
 }
 
-const userLang=navigator.language.startsWith('id')?'id':'en';
-applyLang(userLang);
+const lang=navigator.language.startsWith('id')?'id':'en'
+document.getElementById('title').innerText=i18n[lang].title
+document.getElementById('subtitle').innerText=i18n[lang].subtitle
 
-document.querySelectorAll(".lang-btn").forEach(btn=>{
-btn.onclick=()=>applyLang(btn.dataset.lang);
-});
+// tabs
+document.querySelectorAll('.tab').forEach(t=>{
+t.onclick=()=>{
+document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'))
+document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'))
+t.classList.add('active')
+document.getElementById(t.dataset.tab).classList.add('active')
+}
+})
 
-document.querySelectorAll(".tab").forEach(tab=>{
-tab.onclick=()=>{
-document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
-tab.classList.add("active");
-document.getElementById(tab.dataset.tab).classList.add("active");
-};
-});
-
+// macro
 function calcMacro(){
-const w=+weight.value,h=+height.value,a=+age.value;
-if(!w||!h||!a){macroResult.innerText="Incomplete data";return;}
-let bmr=sex.value==="male"?(10*w+6.25*h-5*a+5):(10*w+6.25*h-5*a-161);
-let tdee=bmr*activity.value;
-if(goal.value==="cut")tdee*=0.8;
-if(goal.value==="bulk")tdee*=1.1;
-let protein=w*1.8;
-let fat=w*0.8;
-let carbs=(tdee-(protein*4+fat*9))/4;
-macroResult.innerText=`${Math.round(tdee)} kcal | P:${protein.toFixed(0)} F:${fat.toFixed(0)} C:${carbs.toFixed(0)}`;
+let w=+weight.value,h=+height.value,a=+age.value
+if(!w||!h||!a){macroResult.innerText='Fill all';return}
+let bmr=10*w+6.25*h-5*a+5
+let tdee=bmr*activity.value
+let deficit=goal.value==='cut'?0.2:goal.value==='bulk'?-0.1:0
+let cal=tdee*(1-deficit)
+let protein=w*1.8
+let fat=w*0.8
+let carbs=(cal-(protein*4+fat*9))/4
+macroResult.innerText=`${Math.round(cal)} kcal | P:${protein} F:${fat} C:${Math.round(carbs)}`
 }
 
+// rpe
 function calcRPE(){
-if(!lw.value||!lr.value){rpeResult.innerText="Incomplete";return;}
-let oneRM=lw.value*(1+lr.value/30);
-rpeResult.innerText=`1RM ≈ ${oneRM.toFixed(1)} kg`;
+if(!lw.value||!lr.value){rpeResult.innerText='Fill';return}
+let oneRM=lw.value*(1+lr.value/30)
+rpeResult.innerText=`1RM ${oneRM.toFixed(1)}`
 }
 
-year.innerText=new Date().getFullYear();
-
+// sticky
 window.addEventListener('scroll',()=>{
 if(window.scrollY>200){sticky.classList.add('show')}
 else{sticky.classList.remove('show')}
-});
+})
 
 </script>
 </body>
