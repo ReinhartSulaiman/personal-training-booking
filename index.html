@@ -24,21 +24,41 @@ padding-bottom:90px;
 
 .container{max-width:1000px;margin:auto;padding:20px}
 
+/* ✅ UPDATED BUTTON */
 .btn{
 display:inline-flex;
 align-items:center;
-gap:8px;
-padding:16px 22px;
-margin:8px;
-border-radius:14px;
-font-weight:700;
+gap:10px;
+padding:18px 26px;
+margin:10px 8px;
+border-radius:16px;
+font-weight:800;
 text-decoration:none;
+font-size:16px;
+letter-spacing:.3px;
+transition:.2s;
+}
+
+.btn.primary{
+background:#38bdf8;
 color:#0b1220;
-background:linear-gradient(180deg,#38bdf8,#0ea5e9);
+box-shadow:0 8px 25px rgba(56,189,248,.5);
+border:2px solid #7dd3fc;
+}
+
+.btn.primary:hover{
+transform:translateY(-2px) scale(1.02);
 }
 
 .btn.secondary{
-background:linear-gradient(180deg,#6ee7f9,#22d3ee);
+background:#22d3ee;
+color:#0b1220;
+opacity:.95;
+}
+
+.btn.secondary:hover{
+opacity:1;
+transform:translateY(-1px);
 }
 
 .section{
@@ -105,9 +125,14 @@ transition:.3s
 <h1 id="title"></h1>
 <p id="subtitle"></p>
 
+<!-- ✅ UPDATED BUTTON SECTION -->
 <div class="section">
-<a id="btnBook" class="btn" href="https://bit.ly/PT-Booking-Reinhart" target="_blank" rel="noopener"></a>
-<a id="btnView" class="btn secondary" href="#schedule"></a>
+<a id="btnBook" class="btn primary" href="https://bit.ly/PT-Booking-Reinhart" target="_blank" rel="noopener"></a>
+
+<a class="btn secondary" href="https://forms.gle/BqhfY4Rrbhf9NbZP9" target="_blank" rel="noopener">
+✏️ Feedback
+</a>
+
 <a id="btnWA" class="btn secondary" href="https://wa.me/6285959735630?text=Hello%20Coach,%20I%20want%20to%20ask%20about%20training." target="_blank" rel="noopener"></a>
 </div>
 
@@ -172,22 +197,10 @@ href="https://calendar.google.com/calendar/u/0/embed?src=cmVpbmhhcnRzdWxhaW1hbkB
 </div>
 
 <div id="library" class="tab-content">
-<div>
-<strong>Leg Day</strong><br>
-<a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1LipGAf-ZUNBOxPy-kE7rmLvHkCLFwIK7">Open</a>
-</div>
-<div>
-<strong>Push Day</strong><br>
-<a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1Ji1jzJpQkFollEmlOwvCmvVDj3uQ7lme">Open</a>
-</div>
-<div>
-<strong>Pull Day</strong><br>
-<a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1MXtRYeJjjzkAhz4CQmvAB0NYOIso7G6b">Open</a>
-</div>
-<div>
-<strong>Mobility</strong><br>
-<a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1PEmK0KWcsuAiZcEZ6m_ujhmGwKgMMkaZ">Open</a>
-</div>
+<div><strong>Leg Day</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1LipGAf-ZUNBOxPy-kE7rmLvHkCLFwIK7">Open</a></div>
+<div><strong>Push Day</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1Ji1jzJpQkFollEmlOwvCmvVDj3uQ7lme">Open</a></div>
+<div><strong>Pull Day</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1MXtRYeJjjzkAhz4CQmvAB0NYOIso7G6b">Open</a></div>
+<div><strong>Mobility</strong><br><a class="btn secondary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1PEmK0KWcsuAiZcEZ6m_ujhmGwKgMMkaZ">Open</a></div>
 </div>
 
 </div>
@@ -196,7 +209,7 @@ href="https://calendar.google.com/calendar/u/0/embed?src=cmVpbmhhcnRzdWxhaW1hbkB
 </div>
 
 <div id="sticky" class="sticky">
-<a href="https://bit.ly/PT-Booking-Reinhart" class="btn">📘 Book Sekarang</a>
+<a href="https://bit.ly/PT-Booking-Reinhart" class="btn primary">📘 Book Sekarang</a>
 </div>
 
 <script>
@@ -206,7 +219,6 @@ id:{
 title:"Booking & Training Tools — Coach Reinhart",
 subtitle:"Booking jadwal, lihat ketersediaan real-time, kalkulator latihan, dan exercise library.",
 book:"📘 Book Sekarang",
-view:"👀 Lihat Jadwal",
 wa:"💬 WhatsApp",
 scheduleTitle:"Jadwal Kosong (Live)",
 scheduleHint:"Gunakan panah ◀ ▶ di kalender.",
@@ -216,13 +228,6 @@ tools:"Training Tools",
 tabMacro:"Macro",
 tabRPE:"RPE",
 tabLibrary:"Library",
-gender:"Jenis Kelamin",
-age:"Usia",
-weight:"Berat",
-height:"Tinggi",
-activity:"Aktivitas",
-goal:"Tujuan",
-meals:"Makan/hari",
 calcMacro:"Hitung Makro",
 calcRPE:"Hitung Beban"
 },
@@ -230,7 +235,6 @@ en:{
 title:"Training Booking & Tools",
 subtitle:"Book sessions and track training.",
 book:"📘 Book Now",
-view:"👀 View Schedule",
 wa:"💬 WhatsApp",
 scheduleTitle:"Live Schedule",
 scheduleHint:"Use arrows to navigate.",
@@ -240,13 +244,6 @@ tools:"Training Tools",
 tabMacro:"Macro",
 tabRPE:"RPE",
 tabLibrary:"Library",
-gender:"Gender",
-age:"Age",
-weight:"Weight",
-height:"Height",
-activity:"Activity",
-goal:"Goal",
-meals:"Meals/day",
 calcMacro:"Calculate",
 calcRPE:"Calculate"
 }
@@ -257,7 +254,6 @@ const t=i18n[lang];
 title.innerText=t.title;
 subtitle.innerText=t.subtitle;
 btnBook.innerText=t.book;
-btnView.innerText=t.view;
 btnWA.innerText=t.wa;
 scheduleTitle.innerText=t.scheduleTitle;
 scheduleHint.innerText=t.scheduleHint;
